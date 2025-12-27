@@ -14,7 +14,33 @@ The system operates as a coordinated swarm of specialized agents:
 2.  **Researcher Agent**: Uses MCP tools to scour the web for product and technology details.
 3.  **Market Analyst Agent**: Uses MCP tools to query proprietary databases for competitor analysis.
 
-![Architecture Diagram](images/architecture_diagram.png)
+```mermaid
+graph TD
+    User([User]) -->|Startup URL| UI[Frontend (Streamlit)]
+    UI -->|REST API| Orch[Orchestrator Agent (FastAPI)]
+    
+    subgraph "Agent Swarm (Backend)"
+        Orch -->|Task Delegation| Res[Researcher Agent]
+        Orch -->|Task Delegation| Mkt[Market Analyst Agent]
+        
+        Res -->|MCP Tool Calls| Web(Search Tools / Brave)
+        Mkt -->|MCP Tool Calls| Data(Financial APIs)
+        
+        Web -->|Market Intelegence| Res
+        Data -->|Competitor Data| Mkt
+        
+        Res -->|Structured Report| Orch
+        Mkt -->|Analysis| Orch
+    end
+    
+    Orch -->|Investment Memo| UI
+    UI -->|Display| User
+
+    style Orch fill:#2ecc71,stroke:#27ae60,color:white
+    style Res fill:#3498db,stroke:#2980b9,color:white
+    style Mkt fill:#9b59b6,stroke:#8e44ad,color:white
+    style UI fill:#34495e,stroke:#2c3e50,color:white
+```
 
 ## 🚀 Getting Started
 
