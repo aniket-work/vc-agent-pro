@@ -16,17 +16,17 @@ The system operates as a coordinated swarm of specialized agents:
 
 ```mermaid
 graph TD
-    User([User]) -->|Startup URL| UI[Frontend (Streamlit)]
-    UI -->|REST API| Orch[Orchestrator Agent (FastAPI)]
+    User([User]) -->|Startup URL| UI[Frontend - Streamlit]
+    UI -->|REST API| Orch[Orchestrator Agent - FastAPI]
     
     subgraph "Agent Swarm (Backend)"
         Orch -->|Task Delegation| Res[Researcher Agent]
         Orch -->|Task Delegation| Mkt[Market Analyst Agent]
         
-        Res -->|MCP Tool Calls| Web(Search Tools / Brave)
-        Mkt -->|MCP Tool Calls| Data(Financial APIs)
+        Res -->|MCP Tool Calls| Web[Search Tools / Brave]
+        Mkt -->|MCP Tool Calls| Data[Financial APIs]
         
-        Web -->|Market Intelegence| Res
+        Web -->|Market Intelligence| Res
         Data -->|Competitor Data| Mkt
         
         Res -->|Structured Report| Orch
